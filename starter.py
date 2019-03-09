@@ -44,20 +44,16 @@ def shuffle(trainData, trainTarget):
 
 
 def relu(x):
-    # TODO
+    pass
 
 def softmax(x):
-    # TODO
-
+    pass
 
 def computeLayer(X, W, b):
-    # TODO
+    pass
 
 def CE(target, prediction):
-
-    # TODO
+    pass
 
 def gradCE(target, prediction):
-
-    # TODO
-
+    pass
