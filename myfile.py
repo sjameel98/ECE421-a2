@@ -4,38 +4,6 @@ trainData, validData, testData, trainTarget, validTarget, testTarget = loadData(
 newtrain, newvalid, newtest = convertOneHot(trainTarget, validTarget, testTarget)
 
 
-#print(np.shape(trainData))
-#print(np.shape(trainTarget))
-#print(newtrain.shape)
-
-'''
-
-print(np.shape(validData))
-print(np.shape(validTarget))
-
-print(np.shape(testData))
-print(np.shape(testTarget))
-'''
-
-
-x = np.array([[1 , -1 , 3]])
-#print(relu(x))
-#print(softmax(x))
-
-W = np.array([[1, 1],
-              [1, 1]])
-X = np.array([1, 1])
-b = np.array([4, 4])
-
-#print(computeLayer(X, W, b))
-
-#predictions = np.random.rand(10000, 10)
-#print(predictions.shape)
-#print(CE(newtrain, predictions))
-
-#print(gradCE(newtrain, predictions))
-
-
 ### Now need a NN implementation: 3 layers [784, 1000, 10]
 
 hidden_units = 100
