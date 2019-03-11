@@ -6,9 +6,9 @@ newtrain, newvalid, newtest = convertOneHot(trainTarget, validTarget, testTarget
 
 ### Now need a NN implementation: 3 layers [784, 1000, 10]
 
-hidden_units = 1000
-epochs = 100
-alpha = 0.001
+hidden_units = 100
+epochs = 200
+alpha = 0.1
 #W0array = np.zeros((epochs, 784, hidden_units))
 #W1array = np.zeros((epochs, hidden_units, 10))
 
@@ -63,22 +63,20 @@ for epoch in range(epochs):
 
     #Accuracy
     trainacc.append((np.sum(np.argmax(x_outer, axis=1) == np.argmax(newtrain, axis=1))/N))
-    validacc.append((np.sum(np.argmax(x_valid, axis=1) == np.argmax(newvalid, axis=1)) / N))
-    testacc.append((np.sum(np.argmax(x_test, axis=1) == np.argmax(newtest, axis=1)) / N))
-
+    validacc.append((np.sum(np.argmax(x_valid, axis=1) == np.argmax(newvalid, axis=1)) /x_valid.shape[0]))
+    testacc.append((np.sum(np.argmax(x_test, axis=1) == np.argmax(newtest, axis=1)) /x_test.shape[0]))
+    print("Training Accuracy = {} | Validation Accuracy = {} | Testing Accuracy = {}".format(trainacc[-1], validacc[-1], testacc[-1]))
     relevantepoch.append(epoch)
 
 
     #Need backprop for optimization now
-    #delta_1 = -1/N * (np.array([1]) - x_outer) * newtrain
-    delta_1 = 1/N * (x_outer - newtrain)
-    dldw_outer = x_hidden.T @ delta_1
-    dldb_outer = np.sum(delta_1, axis=0).reshape(1, 10)
+    delta_1 = (x_outer - newtrain)
+    dldw_outer = 1/N*x_hidden.T @ delta_1
+    dldb_outer = 1/N*np.sum(delta_1, axis=0).reshape(1, 10)
 
-
-    delta_0 = (x_hidden > 0) * (delta_1@W1.T) #Revise this 1/N ?
-    dldw_inner = trainData.T @ delta_0
-    dldb_inner = np.sum(delta_0, axis=0).reshape(1, hidden_units) #This is basically [1 1 .... 1] * delta
+    delta_0 = (x_hidden > 0) * (delta_1@W1.T) #Revise this
+    dldw_inner = 1/N*trainData.T @ delta_0
+    dldb_inner = 1/N*np.sum(delta_0, axis=0).reshape(1, hidden_units) #This is basically [1 1 .... 1] * delta
 
     #Update weights
     mu0_w = gamma0 * mu0_w + alpha*dldw_inner
@@ -142,13 +140,3 @@ print(trainacc)
     #print(np.shape(x_outer))
     #print(W0.shape)
     #print(W1.shape)
-
-
-
-
-
-
-
-
-
-
