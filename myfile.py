@@ -6,9 +6,9 @@ newtrain, newvalid, newtest = convertOneHot(trainTarget, validTarget, testTarget
 
 ### Now need a NN implementation: 3 layers [784, 1000, 10]
 
-hidden_units = 100
-epochs = 200
-alpha = 0.01
+hidden_units = 1000
+epochs = 100
+alpha = 0.001
 #W0array = np.zeros((epochs, 784, hidden_units))
 #W1array = np.zeros((epochs, hidden_units, 10))
 
@@ -68,12 +68,15 @@ for epoch in range(epochs):
 
     relevantepoch.append(epoch)
 
+
     #Need backprop for optimization now
-    delta_1 = -1/N * (np.array([1]) - x_outer) * newtrain
+    #delta_1 = -1/N * (np.array([1]) - x_outer) * newtrain
+    delta_1 = 1/N * (x_outer - newtrain)
     dldw_outer = x_hidden.T @ delta_1
     dldb_outer = np.sum(delta_1, axis=0).reshape(1, 10)
 
-    delta_0 = 1/N * (x_hidden > 0) * (delta_1@W1.T) #Revise this
+
+    delta_0 = (x_hidden > 0) * (delta_1@W1.T) #Revise this 1/N ?
     dldw_inner = trainData.T @ delta_0
     dldb_inner = np.sum(delta_0, axis=0).reshape(1, hidden_units) #This is basically [1 1 .... 1] * delta
 
@@ -102,7 +105,7 @@ plt.plot()
 mytitle = "CELoss|{}Hidden_Units".format(hidden_units)
 plt.title(mytitle, fontsize = 12)
 plt.legend()
-title = "{} Hidden_Units_CELoss".format(hidden_units)
+title = "{} Hidden_Units_CELossa".format(hidden_units)
 plt.savefig(title)
 
 
@@ -116,7 +119,7 @@ plt.plot()
 mytitle = "CE Accuracy|{}Hidden_Units.png".format(hidden_units)
 plt.title(mytitle, fontsize = 12)
 plt.legend()
-title = "{} Hidden_Units_Accuracy".format(hidden_units)
+title = "{} Hidden_Units_Accuracya".format(hidden_units)
 plt.savefig(title)
 
 print(trainloss)
