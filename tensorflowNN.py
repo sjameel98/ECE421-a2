@@ -17,7 +17,7 @@ def CNN(x, conv_layer_kernel, conv_layer_bias, linear_layer1_w, linear_layer1_bi
 
     output = tf.add(tf.matmul(output, linear_layer1_w), linear_layer1_bias)
 
-    #dropout = tf.layers.dropout(output, rate=0.9)
+    output = tf.nn.dropout(output, rate=0.9)
     output = tf.nn.relu(output)
     output = tf.add(tf.matmul(output, linear_layer2_w), linear_layer2_bias)
 
@@ -137,7 +137,7 @@ if __name__ == "__main__":
     mytitle = "CELoss|{} Regularization Constant".format(reg)
     plt.title(mytitle, fontsize=12)
     plt.legend()
-    title = "{} Regularization Loss".format(reg)
+    title = "Dropout{}Loss".format(1) #Change this 1 = 0.01, 2 = 0.1 etc
     plt.savefig(title)
 
     fig = plt.figure()
@@ -150,7 +150,11 @@ if __name__ == "__main__":
     mytitle = "CE Accuracy|{} Regularization Constant".format(reg)
     plt.title(mytitle, fontsize=12)
     plt.legend()
-    title = "{} Regularization Accuracy".format(reg)
+    title = "Dropout{}Accuracy".format(1)#Change this 1 = 0.01, 2 = 0.1 etc or 1==>p=0.9, 2=>p=0.75, 3=>p=0.5
     plt.savefig(title)
+
+    print("final test accuracy: ", testacc_array[-1])
+    print("final validation accuracy: ", validacc_array[-1])
+    print("final train accuracy", trainacc_array[-1])
 
 

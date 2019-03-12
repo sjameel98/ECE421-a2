@@ -6,8 +6,8 @@ newtrain, newvalid, newtest = convertOneHot(trainTarget, validTarget, testTarget
 
 ### Now need a NN implementation: 3 layers [784, 1000, 10]
 
-hidden_units = 100
-epochs = 200
+hidden_units = 1000
+epochs = 50
 alpha = 0.1
 #W0array = np.zeros((epochs, 784, hidden_units))
 #W1array = np.zeros((epochs, hidden_units, 10))

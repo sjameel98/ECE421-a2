@@ -1,0 +1,18 @@
+p = 0.9
+final test accuracy:  0.892
+final validation accuracy:  0.886
+final train accuracy 0.906
+
+
+
+p = 0.75
+final test accuracy:  0.907
+final validation accuracy:  0.915
+final train accuracy 0.966
+
+
+p = 0.5
+
+final test accuracy:  0.919
+final validation accuracy:  0.915
+final train accuracy 0.979
